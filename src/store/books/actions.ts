@@ -57,7 +57,7 @@ export function getBooksAction(searchString = ''): AppThunk<void> {
 
 export function getBookAction(id: string): AppThunk<void> {
 	return dispatch => {
-		dispatch(setBookPendingAC());
+		dispatch(setBookPendingAC(id));
 		getBookApi(id)
 			.then(result => {
 				dispatch(setBookSuccessAC(result.data.book));

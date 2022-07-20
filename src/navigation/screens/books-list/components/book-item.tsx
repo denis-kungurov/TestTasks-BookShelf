@@ -1,8 +1,19 @@
 import React, { memo, useCallback, useMemo } from 'react';
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+	ActivityIndicator,
+	Image,
+	Pressable,
+	StyleSheet,
+	Text,
+	View,
+} from 'react-native';
 import { useSelector } from 'react-redux';
 import { setFavoriteBookId, setReadBookId } from 'store/books/actions';
-import { getFavoriteList, getReadList } from 'store/books/selectors/getters';
+import {
+	getFavoriteList,
+	getLoadingBookId,
+	getReadList,
+} from 'store/books/selectors/getters';
 import { Book } from 'store/books/types';
 
 import { ICON_STAR_ENABLED, ICON_SUCCESS } from 'constants/images';
@@ -17,6 +28,7 @@ function BookItemComponent({
 }) {
 	const dispatch = useAppDispatch();
 	const favoriteList = useSelector(getFavoriteList);
+	const loadingBookId = useSelector(getLoadingBookId);
 	const readList = useSelector(getReadList);
 	const handlePress = useCallback(() => onPress(book.id), [book.id, onPress]);
 
@@ -68,41 +80,67 @@ function BookItemComponent({
 	);
 
 	return (
-		<Pressable onPress={handlePress} style={styles.container} key={book.id}>
-			<View>
-				<Image
-					resizeMode="contain"
-					source={{
-						uri: book.coverImageUrl,
-					}}
-					style={styles.image}
-				/>
+		<>
+			<Pressable
+				onPress={handlePress}
+				style={styles.container}
+				key={book.id}>
+				<View>
+					<Image
+						resizeMode="contain"
+						source={{
+							uri: book.coverImageUrl,
+						}}
+						style={styles.image}
+					/>
 
-				<Pressable style={favButtonStyles} onPress={handleFavoriteBook}>
-					<Image style={styles.favIcon} source={ICON_STAR_ENABLED} />
-					<Text style={styles.favButtonText}>{favButtonText}</Text>
-				</Pressable>
-				{isFavoriteBook && (
 					<Pressable
-						style={readButtonStyles}
-						onPress={handleReadBook}>
-						<Image style={styles.favIcon} source={ICON_SUCCESS} />
+						style={favButtonStyles}
+						onPress={handleFavoriteBook}>
+						<Image
+							style={styles.favIcon}
+							source={ICON_STAR_ENABLED}
+						/>
 						<Text style={styles.favButtonText}>
-							{readButtonText}
+							{favButtonText}
 						</Text>
 					</Pressable>
+					{isFavoriteBook && (
+						<Pressable
+							style={readButtonStyles}
+							onPress={handleReadBook}>
+							<Image
+								style={styles.favIcon}
+								source={ICON_SUCCESS}
+							/>
+							<Text style={styles.favButtonText}>
+								{readButtonText}
+							</Text>
+						</Pressable>
+					)}
+				</View>
+				<View style={styles.infoContainer}>
+					<Text style={styles.title}>{book.title}</Text>
+					<Text style={styles.author}>{book.author}</Text>
+					<Text style={styles.topSpace}>
+						{'Pages count: ' + book.pageCount}
+					</Text>
+					<Text>{'Publisher: ' + book.publisher}</Text>
+					<Text style={styles.topSpace}>{book.synopsis}</Text>
+				</View>
+				{loadingBookId === book?.id && (
+					<ActivityIndicator
+						size={'large'}
+						color="gray"
+						style={{
+							...StyleSheet.absoluteFillObject,
+							backgroundColor: 'white',
+							opacity: 0.5,
+						}}
+					/>
 				)}
-			</View>
-			<View style={styles.infoContainer}>
-				<Text style={styles.title}>{book.title}</Text>
-				<Text style={styles.author}>{book.author}</Text>
-				<Text style={styles.topSpace}>
-					{'Pages count: ' + book.pageCount}
-				</Text>
-				<Text>{'Publisher: ' + book.publisher}</Text>
-				<Text style={styles.topSpace}>{book.synopsis}</Text>
-			</View>
-		</Pressable>
+			</Pressable>
+		</>
 	);
 }
 

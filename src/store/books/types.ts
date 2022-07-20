@@ -24,7 +24,7 @@ export interface BooksState {
 	favoriteList: string[];
 	readList: string[];
 	booksLoading: boolean;
-	bookLoading: boolean;
+	loadingBookId: string | null;
 	bookDetails: Book | null;
 	error: string | null;
 	bookError: string | null;
@@ -46,6 +46,7 @@ export interface SetBooksErrorAction {
 
 export interface SetBookPendingAction {
 	type: BOOKS_ACTIONS_TYPES.SET_BOOK_PENDING;
+	payload: string;
 }
 
 export interface SetBookSuccessAction {

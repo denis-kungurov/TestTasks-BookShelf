@@ -16,7 +16,6 @@ import { getBookAction, getBooksAction } from 'store/books/actions';
 import {
 	getBookDetails,
 	getBookError,
-	getBookLoading,
 	getBooksList,
 	getBooksLoading,
 	getFavoriteList,
@@ -36,13 +35,11 @@ function BooksListScreenComponent() {
 	const bookDetails = useSelector(getBookDetails);
 	const bookError = useSelector(getBookError);
 	const booksLoading = useSelector(getBooksLoading);
-	const bookLoading = useSelector(getBookLoading);
 	const favoriteList = useSelector(getFavoriteList);
 	const readList = useSelector(getReadList);
 	const [searchText, setSearchText] = useState('');
 	const [showFavorite, setShowFavorite] = useState(false);
 	const [showRead, setShowRead] = useState(false);
-	const [loadingBookId, setLoadingBookId] = useState(null);
 
 	useEffect(() => {
 		dispatch(getBooksAction(searchText));

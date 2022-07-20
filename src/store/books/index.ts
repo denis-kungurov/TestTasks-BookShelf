@@ -6,7 +6,7 @@ const initialState: BooksState = {
 	bookError: null,
 	list: [],
 	booksLoading: false,
-	bookLoading: false,
+	loadingBookId: null,
 	favoriteList: [],
 	readList: [],
 };
@@ -37,7 +37,7 @@ export default function (
 		case BOOKS_ACTIONS_TYPES.SET_BOOK_PENDING:
 			return {
 				...state,
-				bookLoading: true,
+				loadingBookId: action.payload,
 				bookError: null,
 				bookDetails: null,
 			};
@@ -45,13 +45,13 @@ export default function (
 			return {
 				...state,
 				bookDetails: action.payload,
-				bookLoading: false,
+				loadingBookId: null,
 			};
 		case BOOKS_ACTIONS_TYPES.SET_BOOK_ERROR:
 			return {
 				...state,
 				bookError: action.payload,
-				bookLoading: false,
+				loadingBookId: null,
 				bookDetails: null,
 			};
 
