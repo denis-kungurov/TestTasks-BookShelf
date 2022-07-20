@@ -62,7 +62,14 @@ export function getBookAction(id: string): AppThunk<void> {
 			.then(result => {
 				dispatch(setBookSuccessAC(result.data.book));
 			})
-			.catch(error => dispatch(setBooksErrorAC(error.message)));
+			.catch(error => {
+				dispatch(
+					setBookErrorAC(
+						error?.response?.data?.message ??
+							'Something went wrong',
+					),
+				);
+			});
 	};
 }
 

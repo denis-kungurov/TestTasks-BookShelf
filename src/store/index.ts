@@ -11,6 +11,7 @@ const conf: { [key: string]: PersistConfig<any> } = {
 	books: {
 		key: 'books',
 		storage: AsyncStorage,
+		whitelist: ['favoriteList', 'readList'],
 	},
 };
 

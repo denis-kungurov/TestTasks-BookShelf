@@ -1,4 +1,4 @@
-import { API } from 'api';
+import { getAPI } from 'api';
 import { Book } from 'store/books/types';
 
 export function getBooksApi(searchString = ''): Promise<Book[]> {
@@ -6,9 +6,9 @@ export function getBooksApi(searchString = ''): Promise<Book[]> {
 	if (searchString) {
 		query = `?q=${searchString}`;
 	}
-	return API.get(`/books${query}`);
+	return getAPI().get(`/books${query}`);
 }
 
 export function getBookApi(id: string): Promise<Book> {
-	return API.get(`/books/${id}`);
+	return getAPI().get(`/books/${id}`);
 }

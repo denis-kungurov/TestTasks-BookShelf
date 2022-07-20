@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Toast from 'react-native-toast-message';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -17,6 +18,7 @@ export default function App(): React.ReactElement {
 				<FlipperAsyncStorage />
 				<SafeAreaProvider>
 					<Navigator />
+					<Toast />
 				</SafeAreaProvider>
 			</PersistGate>
 		</Provider>

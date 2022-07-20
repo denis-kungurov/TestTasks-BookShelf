@@ -11,6 +11,7 @@ import {
 	Text,
 	ActivityIndicator,
 } from 'react-native';
+import Toast from 'react-native-toast-message';
 import { useSelector } from 'react-redux';
 import { getBookAction, getBooksAction } from 'store/books/actions';
 import {
@@ -45,6 +46,16 @@ function BooksListScreenComponent() {
 		dispatch(getBooksAction(searchText));
 	}, [dispatch, searchText]);
 
+	useEffect(() => {
+		if (bookError) {
+			Toast.show({
+				type: 'error',
+				text1: 'Error',
+				text2: bookError,
+			});
+		}
+	}, [bookError]);
+
 	const booksList = useMemo(() => {
 		if (showFavorite) {
 			return books.filter(book => favoriteList.includes(book?.id));
@@ -75,7 +86,9 @@ function BooksListScreenComponent() {
 	);
 
 	const renderBook = useCallback(
-		(book: Book) => <BookItem onPress={handleOpenBook} book={book} />,
+		(book: Book) => (
+			<BookItem key={book?.id} onPress={handleOpenBook} book={book} />
+		),
 		[handleOpenBook],
 	);
 
@@ -85,6 +98,28 @@ function BooksListScreenComponent() {
 		setShowFavorite(false);
 		setShowRead(false);
 	}, []);
+
+	const listView = useMemo(() => {
+		if (booksList.length) {
+			return (
+				<ScrollView
+					style={styles.scroll}
+					contentContainerStyle={styles.scrollContainer}>
+					{booksList.map(renderBook)}
+				</ScrollView>
+			);
+		} else {
+			return (
+				<View style={styles.emptyContainer}>
+					<Text>
+						{showFavorite
+							? 'The list of favorite books is empty'
+							: 'The list of read books is empty'}
+					</Text>
+				</View>
+			);
+		}
+	}, [booksList, renderBook, showFavorite]);
 
 	return (
 		<View style={styles.container}>
@@ -127,11 +162,7 @@ function BooksListScreenComponent() {
 					size="large"
 				/>
 			) : (
-				<ScrollView
-					style={styles.scroll}
-					contentContainerStyle={styles.scrollContainer}>
-					{booksList.map(renderBook)}
-				</ScrollView>
+				listView
 			)}
 		</View>
 	);
@@ -164,6 +195,11 @@ const styles = StyleSheet.create({
 		borderRadius: 15,
 		alignItems: 'center',
 		marginHorizontal: 10,
+	},
+	emptyContainer: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 });
 

@@ -5,8 +5,7 @@ import {
 	NavigationContainerRef,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { initApi } from 'api';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { ROUTES } from '../constants/routes';
 
@@ -19,8 +18,6 @@ export const navigationRef = createNavigationContainerRef();
 export default function Navigators(): React.ReactElement {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	useFlipper(navigationRef as React.RefObject<NavigationContainerRef<any>>);
-
-	useEffect(() => initApi(), []);
 
 	return (
 		<NavigationContainer ref={navigationRef}>
