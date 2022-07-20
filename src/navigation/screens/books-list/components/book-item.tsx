@@ -15,6 +15,7 @@ import {
 	getReadList,
 } from 'store/books/selectors/getters';
 import { Book } from 'store/books/types';
+import { sh, sw } from 'styles';
 
 import { ICON_STAR_ENABLED, ICON_SUCCESS } from 'constants/images';
 import { useAppDispatch } from 'hooks/redux';
@@ -148,56 +149,56 @@ const styles = StyleSheet.create({
 	container: {
 		borderWidth: 1,
 		borderColor: 'gray',
-		borderRadius: 20,
-		padding: 10,
-		marginBottom: 10,
+		borderRadius: sh(20),
+		padding: sh(10),
+		marginBottom: sh(10),
 		backgroundColor: 'white',
 		flexDirection: 'row',
 		alignItems: 'flex-start',
 	},
 	image: {
-		width: 100,
-		height: 150,
+		width: sw(100),
+		height: sw(150),
 	},
 	infoContainer: {
 		alignItems: 'flex-start',
 		justifyContent: 'center',
 		flex: 1,
-		marginLeft: 10,
+		marginLeft: sw(10),
 	},
 	title: {
 		color: '#2A2D35',
 		fontWeight: '600',
-		fontSize: 16,
+		fontSize: sw(16),
 	},
 	author: {
 		fontStyle: 'italic',
 		color: 'gray',
-		marginTop: 5,
+		marginTop: sh(5),
 	},
 	topSpace: {
-		marginTop: 20,
+		marginTop: sh(20),
 	},
 	favButton: {
-		width: 100,
-		height: 70,
+		width: sw(100),
+		height: sw(70),
 		backgroundColor: '#E2E6ED',
-		padding: 5,
-		borderRadius: 10,
+		padding: sw(5),
+		borderRadius: sw(10),
 		justifyContent: 'center',
 		alignItems: 'center',
-		marginVertical: 10,
+		marginVertical: sh(10),
 	},
 	favButtonText: {
 		fontWeight: '500',
 		color: 'light-gray',
 		textAlign: 'center',
-		marginTop: 5,
-		fontSize: 10,
+		marginTop: sh(5),
+		fontSize: sw(10),
 	},
 	favIcon: {
-		width: 20,
-		height: 20,
+		width: sw(20),
+		height: sw(20),
 	},
 });
 

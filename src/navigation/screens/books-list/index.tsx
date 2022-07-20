@@ -23,6 +23,7 @@ import {
 	getReadList,
 } from 'store/books/selectors/getters';
 import { Book } from 'store/books/types';
+import { sh, sw } from 'styles';
 
 import { ROUTES } from 'constants/routes';
 import { useAppDispatch } from 'hooks/redux';
@@ -173,28 +174,28 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	scroll: {
-		padding: 10,
+		padding: sh(10),
 	},
 	scrollContainer: {
-		paddingBottom: 30,
+		paddingBottom: sh(30),
 	},
 	searchContainer: {
-		margin: 10,
-		padding: 10,
+		margin: sh(10),
+		padding: sh(10),
 		backgroundColor: '#E2E6ED',
 	},
 	filtersContainer: {
 		flexDirection: 'row',
 		justifyContent: 'center',
-		marginVertical: 10,
+		marginVertical: sh(10),
 	},
 	filterButton: {
 		backgroundColor: '#E2E6ED',
 		width: '30%',
-		paddingVertical: 10,
-		borderRadius: 15,
+		paddingVertical: sh(10),
+		borderRadius: sh(15),
 		alignItems: 'center',
-		marginHorizontal: 10,
+		marginHorizontal: sw(10),
 	},
 	emptyContainer: {
 		flex: 1,

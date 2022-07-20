@@ -15,6 +15,7 @@ import {
 	getFavoriteList,
 	getReadList,
 } from 'store/books/selectors/getters';
+import { sh, sw } from 'styles';
 
 import { ICON_STAR_ENABLED, ICON_SUCCESS } from 'constants/images';
 import { useAppDispatch } from 'hooks/redux';
@@ -138,58 +139,58 @@ function BookScreenComponent() {
 const styles = StyleSheet.create({
 	scroll: {
 		flex: 1,
-		padding: 20,
+		padding: sh(20),
 	},
 	scrollContainer: {
-		paddingBottom: 30,
+		paddingBottom: sh(30),
 		alignItems: 'center',
 	},
 	image: {
-		width: 200,
-		height: 300,
+		width: sw(200),
+		height: sw(300),
 	},
 	infoContainer: {
 		alignItems: 'center',
 		flex: 1,
-		marginTop: 20,
+		marginTop: sh(20),
 	},
 	title: {
 		color: '#2A2D35',
 		fontWeight: '600',
-		fontSize: 16,
+		fontSize: sw(16),
 	},
 	author: {
 		fontStyle: 'italic',
 		color: 'gray',
-		marginTop: 5,
+		marginTop: sh(5),
 	},
 	topSpace: {
-		marginTop: 20,
+		marginTop: sh(20),
 	},
 	favButtonsContainer: {
 		flexDirection: 'row',
-		marginVertical: 10,
+		marginVertical: sh(10),
 	},
 	favButton: {
-		width: 100,
-		height: 70,
+		width: sw(100),
+		height: sw(70),
 		backgroundColor: '#E2E6ED',
-		padding: 5,
-		borderRadius: 10,
+		padding: sw(5),
+		borderRadius: sw(10),
 		justifyContent: 'center',
 		alignItems: 'center',
-		marginHorizontal: 10,
+		marginHorizontal: sw(10),
 	},
 	favButtonText: {
 		fontWeight: '500',
 		color: 'light-gray',
 		textAlign: 'center',
-		marginTop: 5,
-		fontSize: 10,
+		marginTop: sh(5),
+		fontSize: sw(10),
 	},
 	favIcon: {
-		width: 20,
-		height: 20,
+		width: sw(20),
+		height: sw(20),
 	},
 });
 
